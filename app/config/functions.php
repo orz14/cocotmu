@@ -111,6 +111,19 @@ function editPost($data){
 	return mysqli_affected_rows($koneksi);
 }
 
+function ngelike($data){
+    global $koneksi;
+	$id_post = $data['id_post'];
+	$username = $data['username'];
+	$dataLike = mysqli_query($koneksi, "SELECT id FROM like_tb WHERE id_post='$id_post' AND username = '$username'");
+		if(mysqli_num_rows($dataLike) === 1){
+			return true;
+		}else{
+            mysqli_query($koneksi, "INSERT INTO like_tb VALUES('', '$id_post', '$username')");
+		}
+	return mysqli_affected_rows($koneksi);
+}
+
 function uploadFp(){
 	$namaFile = $_FILES['fp']['name'];
 	$ukuranFile = $_FILES['fp']['size'];
