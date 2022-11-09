@@ -410,6 +410,22 @@ body {
 .dropdown-orz > .dropdown-toggle::after {
   display: none;
 }
+/* Trix Editor */
+trix-toolbar {
+  visibility: hidden !important;
+  display: none !important;
+}
+trix-editor {
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0 12px 12px;
+  width: 100%;
+  min-height: 100px;
+}
 /* Content */
 .box {
   position: relative;
@@ -533,9 +549,6 @@ body {
 .dropdown-menu,
 .form-select {
   font-size: unset;
-}
-.form-status-orz > .form-control {
-  border-radius: 0 12px 12px;
 }
 .pp-post {
   width: 50px;

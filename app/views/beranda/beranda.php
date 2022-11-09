@@ -172,9 +172,9 @@
                 <img src="<?= BASEURL; ?>/img/profil/<?= $user["fp"]; ?>" class="pp-status" alt="<?= $user["nama"]; ?>" />
               </div>
               <div class="flex-grow-1 ms-3">
-                <div class="form-floating form-status-orz">
-                  <textarea name="teks" class="form-control" placeholder="Apa yang Anda pikirkan, <?= $namaDepan; ?>?" id="floatingTextarea2" style="width: 100%; height: 100px"></textarea>
-                  <label for="floatingTextarea2">Apa yang Anda pikirkan, <?= $namaDepan; ?>?</label>
+                <div>
+                  <input id="teks" type="hidden" name="teks" autofocus>
+                  <trix-editor input="teks" autofocus></trix-editor>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
                   <div>

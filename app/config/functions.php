@@ -83,7 +83,8 @@ function editProfil($data){
 function posting($data){
     global $koneksi;
 	$username = $data["username"];
-	$teks = htmlspecialchars($data["teks"]);
+	$teks = $data["teks"];
+	$komen = "false";
     $imgDefault = "";
 	if($_FILES['img']['error'] === 4){
 		$img = $imgDefault;
@@ -92,7 +93,7 @@ function posting($data){
 	}
 	$time = $data["time"];
 	$suspend = "false";
-	mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$username', '$teks', '$img', '$time', '$suspend')");
+	mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$username', '$teks', '$komen', '$img', '$time', '$suspend')");
 	return mysqli_affected_rows($koneksi);
 }
 

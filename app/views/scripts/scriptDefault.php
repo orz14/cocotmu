@@ -6,6 +6,10 @@
       //<![CDATA[
       // Preloader
       $(window).load(function(){$(".spinner").fadeOut(),$("#preloader").delay(350).fadeOut("slow"),$("body").delay(350).css({overflow:"visible"})});
+
+      document.addEventListener('trix-file-accept', function(e) {
+        e.preventDefault();
+      });
       
       $(window).scroll(function () {
         if ($(this).scrollTop() > 305) {
