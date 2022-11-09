@@ -22,7 +22,7 @@
           }
         }
         // Postingan
-        $post = query("SELECT id, username, teks, komen, img, time, suspend FROM cocotan_tb ORDER BY id DESC");
+        $post = query("SELECT id, username, teks, img, time, suspend FROM cocotan_tb ORDER BY id DESC");
         // Like
         if(isset($_POST["like"])){
           $postId = $_POST['id_post'];
@@ -34,6 +34,19 @@
               ";
           }else{
               $gagalLike = false;
+          }
+        }
+        // Komen
+        if(isset($_POST["kirimkomen"])){
+          $postId = $_POST['idpost'];
+          if(ngomen($_POST) > 0){
+              echo "
+                <script>
+                  document.location.href = '".BASEURL."/#".$postId."';
+                </script>
+              ";
+          }else{
+              $gagalKomen = false;
           }
         }
         // Daftar
@@ -174,7 +187,7 @@
               <div class="flex-grow-1 ms-3">
                 <div>
                   <input id="teks" type="hidden" name="teks" autofocus>
-                  <trix-editor input="teks" autofocus></trix-editor>
+                  <trix-editor class="trix-beranda" input="teks" autofocus></trix-editor>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
                   <div>
@@ -263,7 +276,7 @@
               <button type="submit" name="like" class="btn btn-post-action btn-post-like"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
             </form>
             <?php endif; ?>
-            <button class="btn btn-post-action btn-post-comment"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
+            <a href="#" class="btn btn-post-action btn-post-comment" onClick="komen_modal('<?= $postId; ?>');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
             <?php else : ?>
               <button class="btn btn-post-action btn-post-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
               <button class="btn btn-post-action btn-post-comment" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
@@ -272,7 +285,6 @@
         </div>
         <div class="clear"></div>
 
-        <?php if($postingan["komen"] === "true") : ?>
         <div class="box-comment-wrapper align-items-end float-end">
         <?php foreach($comments as $komen) : ?>
         <?php
@@ -317,7 +329,6 @@
           </div>
         <?php endforeach; ?>
         </div>
-        <?php endif; ?>
 
         <div class="clear"></div>
         <?php endforeach; ?>
@@ -418,4 +429,32 @@
       </div>
     </div>
     <?php endif; ?>
-    
+    <?php if(isset($_SESSION['cocotmulogin'])) : ?>
+    <!-- Modal Komen -->
+    <div class="modal fade" id="modalKomen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalKomenLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-login">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalKomenLabel">Comment</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="" method="post">
+              <input type="hidden" name="idpost" id="ambil_id" value="#">
+              <input type="hidden" name="username" value="<?= $_SESSION["cocotmuuser"]; ?>">
+              <input type="hidden" name="time" value="<?= $time; ?>">
+              <div>
+                <input id="komen" type="hidden" name="komen">
+                <trix-editor class="trix-editpost" input="komen"></trix-editor>
+              </div>
+              <div class="d-grid mt-3">
+                <button class="btn btn-orz" type="submit" name="kirimkomen">
+                  <span class="jejer justify-content-center">Kirim<i class="bx bx-send icon-right"></i></span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>

@@ -10,6 +10,11 @@
       document.addEventListener('trix-file-accept', function(e) {
         e.preventDefault();
       });
+
+      function komen_modal(id_post) {
+        $('#modalKomen').modal('show', {backdrop: 'static'});
+        document.getElementById('ambil_id').setAttribute('value' , id_post);
+      }
       
       $(window).scroll(function () {
         if ($(this).scrollTop() > 305) {

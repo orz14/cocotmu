@@ -415,7 +415,7 @@ trix-toolbar {
   visibility: hidden !important;
   display: none !important;
 }
-trix-editor {
+.trix-beranda {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
@@ -425,6 +425,25 @@ trix-editor {
   border-radius: 0 12px 12px;
   width: 100%;
   min-height: 100px;
+  transition: all 0.5s ease !important;
+}
+.trix-beranda:focus {
+  border-color: #283593;
+}
+.trix-editpost {
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 12px;
+  width: 100%;
+  min-height: 200px;
+  transition: all 0.5s ease !important;
+}
+.trix-editpost:focus {
+  border-color: #283593;
 }
 /* Content */
 .box {
@@ -444,7 +463,7 @@ trix-editor {
 }
 .box-comment-wrapper {
   position: relative;
-  width: 94%;
+  width: 96%;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -457,7 +476,7 @@ trix-editor {
   z-index: 1;
 }
 .box-comment {
-  width: 95%;
+  width: 96%;
 }
 .box-clear {
   position: relative;

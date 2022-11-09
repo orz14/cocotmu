@@ -60,9 +60,9 @@
           <div class="alert alert-danger mt-3" role="alert">Kami menangguhkan postingan Anda karena terlalu sensitif!</div>
           <?php endif; ?>
           <?php if($post["suspend"] === "false") : ?>
-          <div class="form-floating mt-3">
-            <textarea name="teks" class="form-control" placeholder="Apa yang Anda pikirkan, <?= $namaDepan; ?>?" id="floatingTextarea1" style="width: 100%; height: 200px"><?= $post["teks"]; ?></textarea>
-            <label for="floatingTextarea1">Apa yang Anda pikirkan, <?= $namaDepan; ?>?</label>
+          <div class="mt-3">
+            <input id="teks" type="hidden" name="teks" value="<?= $post["teks"]; ?>" autofocus>
+            <trix-editor class="trix-editpost" input="teks" autofocus></trix-editor>
           </div>
           <?php if($post["img"]) : ?>
           <div class="mt-3 text-center">

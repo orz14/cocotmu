@@ -84,7 +84,6 @@ function posting($data){
     global $koneksi;
 	$username = $data["username"];
 	$teks = $data["teks"];
-	$komen = "false";
     $imgDefault = "";
 	if($_FILES['img']['error'] === 4){
 		$img = $imgDefault;
@@ -93,22 +92,36 @@ function posting($data){
 	}
 	$time = $data["time"];
 	$suspend = "false";
-	mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$username', '$teks', '$komen', '$img', '$time', '$suspend')");
+	if(strlen($teks)> 1021){
+		echo "<script>
+				alert('Postingan tidak boleh melebihi 1000 karakter.');
+			</script>";
+		return false;
+	}else{
+		mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$username', '$teks', '$img', '$time', '$suspend')");
+	}
 	return mysqli_affected_rows($koneksi);
 }
 
 function editPost($data){
 	global $koneksi;
 	$id = $data["id"];
-	$teks = htmlspecialchars($data["teks"]);
+	$teks = $data["teks"];
 	$imgLama = $data["imgLama"];
 	if($_FILES['img']['error'] === 4){
 		$img = $imgLama;
 	} else{
 		$img = uploadImg();
 	}
-	$query = "UPDATE cocotan_tb SET teks='$teks', img='$img' WHERE id = $id";
-	mysqli_query($koneksi, $query);
+	if(strlen($teks)> 1021){
+		echo "<script>
+				alert('Postingan tidak boleh melebihi 1000 karakter.');
+			</script>";
+		return false;
+	}else{
+		$query = "UPDATE cocotan_tb SET teks='$teks', img='$img' WHERE id = $id";
+		mysqli_query($koneksi, $query);
+	}
 	return mysqli_affected_rows($koneksi);
 }
 
@@ -122,6 +135,16 @@ function ngelike($data){
 		}else{
             mysqli_query($koneksi, "INSERT INTO like_tb VALUES('', '$id_post', '$username')");
 		}
+	return mysqli_affected_rows($koneksi);
+}
+
+function ngomen($data){
+    global $koneksi;
+	$id_post = $data['idpost'];
+	$username = $data['username'];
+	$komen = $data['komen'];
+	$time = $data['time'];
+	mysqli_query($koneksi, "INSERT INTO komen_tb VALUES('', '$id_post', '$username', '$komen', '$time')");
 	return mysqli_affected_rows($koneksi);
 }
 
