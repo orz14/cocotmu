@@ -22,13 +22,18 @@
           }
         }
         // Postingan
-        $post = query("SELECT id, username, teks, img, time, suspend FROM cocotan_tb ORDER BY id DESC");
+        $post = query("SELECT id, username, teks, komen, img, time, suspend FROM cocotan_tb ORDER BY id DESC");
         // Like
         if(isset($_POST["like"])){
+          $postId = $_POST['id_post'];
           if(ngelike($_POST) > 0){
-              $berhasilLike = true;
+              echo "
+                <script>
+                  document.location.href = '".BASEURL."/#".$postId."';
+                </script>
+              ";
           }else{
-              $gagalLike = true;
+              $gagalLike = false;
           }
         }
         // Daftar
@@ -197,8 +202,9 @@
         $postId = $postingan["id"];
         $detail = query("SELECT nama, fp, verified, geek FROM users_tb WHERE username='$users'")[0];
         $likes = count(query("SELECT id FROM like_tb WHERE id_post=$postId"));
+        $comments = query("SELECT id, username, komen, time FROM komen_tb WHERE id_post=$postId");
         ?>
-        <div class="box mt-4">
+        <div class="box mt-4" id="<?= $postingan["id"]; ?>">
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
               <div>
@@ -241,7 +247,7 @@
           </div>
           <?php endif; ?>
           <hr>
-          <div class="d-flex">
+          <div class="d-flex gap-2">
             <?php
             if(!isset($_SESSION['cocotmulogin'])){
               $username = "null";
@@ -249,67 +255,70 @@
             $dataLike = mysqli_query($koneksi, "SELECT id FROM like_tb WHERE id_post='$postId' AND username = '$username'");
             ?>
             <?php if(isset($_SESSION['cocotmulogin'])) : ?>
-            <?php if(mysqli_num_rows($dataLike) === 1){ ?>
+            <?php if(mysqli_num_rows($dataLike) === 1) : ?>
               <button class="btn btn-like"><span class="jejer"><i class='bx bxs-heart' ></i>&nbsp;<?= $likes; ?></span></button>
-            <?php }else{ ?>
+            <?php else : ?>
             <form action="" method="POST">
               <input type="hidden" name="id_post" value="<?= $postingan["id"]; ?>">
               <input type="hidden" name="username" value="<?= $_SESSION["cocotmuuser"]; ?>">
               <button type="submit" name="like" class="btn btn-like"><span class="jejer"><i class='bx bx-heart' ></i>&nbsp;<?= $likes; ?></span></button>
             </form>
-            <?php } ?>
-            <button class="btn btn-like ms-2"><span class="jejer"><i class='bx bx-message-rounded-dots'></i>&nbsp;Comment</span></button>
+            <?php endif; ?>
+            <button class="btn btn-like"><span class="jejer"><i class='bx bx-message-rounded-dots'></i>&nbsp;Comment</span></button>
             <?php else : ?>
               <button class="btn btn-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart' ></i>&nbsp;<?= $likes; ?></span></button>
-              <button class="btn btn-like ms-2" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-rounded-dots'></i>&nbsp;Comment</span></button>
+              <button class="btn btn-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-rounded-dots'></i>&nbsp;Comment</span></button>
             <?php endif; ?>
           </div>
         </div>
         <div class="clear"></div>
 
-        <div class="box box-comment float-end mt-4">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
+        <?php if($postingan["komen"] === "true") : ?>
+        <?php foreach($comments as $komen) : ?>
+        <?php
+        $usersKomen = $komen["username"];
+        $detailUserKomen = query("SELECT nama, fp, verified, geek FROM users_tb WHERE username='$usersKomen'")[0];  
+        ?>
+        <div class="box-comment-wrapper align-items-end float-end">
+          <div class="box box-comment mt-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <div>
+                  <img src="<?= BASEURL; ?>/img/profil/<?= $detailUserKomen["fp"]; ?>" class="pp-post" alt="<?= $detailUserKomen["nama"]; ?>" />
+                </div>
+                <div class="ms-3">
+                  <span class="namauser"><?= $detailUserKomen["nama"]; ?><?php if($detailUserKomen["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detailUserKomen["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
+                  <span class="tglpost"><?= $komen["time"]; ?><?php if($user["geek"] === "true") : ?> #<?= $komen["id"]; ?><?php endif; ?></span>
+                </div>
+              </div>
+              <!-- <?php if($komen["username"] === $_SESSION["cocotmuuser"]) : ?>
               <div>
-                <img src="<?= BASEURL; ?>/img/profil/<?= $detail["fp"]; ?>" class="pp-post" alt="<?= $detail["nama"]; ?>" />
+                <div class="dropdown dropdown-orz">
+                  <button class="btn-option dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <?php if($komen["suspend"] === "false") : ?>
+                    <li>
+                      <a class="dropdown-item" href="<?= BASEURL; ?>/post/edit/<?= $komen["id"]; ?>"
+                        ><span class="jejer"><i class="bx bx-edit"></i>&nbsp;Edit Post</span></a
+                      >
+                    </li>
+                    <?php endif; ?>
+                    <li>
+                      <a class="dropdown-item" href="<?= BASEURL; ?>/post/hapus/<?= $komen["id"]; ?>" onclick="return confirm('Yakin ingin menghapus data ?');"><span class="jejer"><i class="bx bx-trash"></i>&nbsp;Hapus Post</span></a
+                      >
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div class="ms-3">
-                <span class="namauser"><?= $detail["nama"]; ?><?php if($detail["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detail["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
-                <span class="tglpost"><?= $postingan["time"]; ?><?php if($user["geek"] === "true") : ?> #<?= $postingan["id"]; ?><?php endif; ?></span>
-              </div>
+              <?php endif; ?> -->
             </div>
-            <?php if($postingan["username"] === $_SESSION["cocotmuuser"]) : ?>
-            <div>
-              <div class="dropdown dropdown-orz">
-                <button class="btn-option dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <?php if($postingan["suspend"] === "false") : ?>
-                  <li>
-                    <a class="dropdown-item" href="<?= BASEURL; ?>/post/edit/<?= $postingan["id"]; ?>"
-                      ><span class="jejer"><i class="bx bx-edit"></i>&nbsp;Edit Post</span></a
-                    >
-                  </li>
-                  <?php endif; ?>
-                  <li>
-                    <a class="dropdown-item" href="<?= BASEURL; ?>/post/hapus/<?= $postingan["id"]; ?>" onclick="return confirm('Yakin ingin menghapus data ?');"><span class="jejer"><i class="bx bx-trash"></i>&nbsp;Hapus Post</span></a
-                    >
-                  </li>
-                </ul>
-              </div>
+            <div class="mt-2">
+              <?= $komen["komen"]; ?>
             </div>
-            <?php endif; ?>
           </div>
-          <?php if($postingan["teks"]) : ?>
-          <div class="mt-2">
-            Komentar disini.
-          </div>
-          <?php endif; ?>
-          <?php if($postingan["img"]) : ?>
-          <div class="mt-3 text-center">
-            <img src="<?= BASEURL; ?>/img/post/<?= $postingan["img"]; ?>" class="img-post" alt="Images" />
-          </div>
-          <?php endif; ?>
         </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
 
         <div class="clear"></div>
         <?php endforeach; ?>
