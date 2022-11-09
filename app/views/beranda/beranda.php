@@ -211,7 +211,7 @@
                 <img src="<?= BASEURL; ?>/img/profil/<?= $detail["fp"]; ?>" class="pp-post" alt="<?= $detail["nama"]; ?>" />
               </div>
               <div class="ms-3">
-                <span class="namauser"><?= $detail["nama"]; ?><?php if($detail["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detail["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
+                <span class="namauser"><a href="<?= BASEURL; ?>/p/<?= $users; ?>"><?= $detail["nama"]; ?></a><?php if($detail["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detail["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
                 <span class="tglpost"><?= $postingan["time"]; ?><?php if($user["geek"] === "true") : ?> #<?= $postingan["id"]; ?><?php endif; ?></span>
               </div>
             </div>
@@ -246,8 +246,7 @@
             <img src="<?= BASEURL; ?>/img/post/<?= $postingan["img"]; ?>" class="img-post" alt="Images" />
           </div>
           <?php endif; ?>
-          <hr>
-          <div class="d-flex gap-2">
+          <div class="post-action d-flex mt-2 gap-2">
             <?php
             if(!isset($_SESSION['cocotmulogin'])){
               $username = "null";
@@ -256,30 +255,30 @@
             ?>
             <?php if(isset($_SESSION['cocotmulogin'])) : ?>
             <?php if(mysqli_num_rows($dataLike) === 1) : ?>
-              <button class="btn btn-like"><span class="jejer"><i class='bx bxs-heart' ></i>&nbsp;<?= $likes; ?></span></button>
+              <button class="btn btn-post-action btn-post-like"><span class="jejer"><i class='bx bxs-heart icon-left' ></i><?= $likes; ?></span></button>
             <?php else : ?>
             <form action="" method="POST">
               <input type="hidden" name="id_post" value="<?= $postingan["id"]; ?>">
               <input type="hidden" name="username" value="<?= $_SESSION["cocotmuuser"]; ?>">
-              <button type="submit" name="like" class="btn btn-like"><span class="jejer"><i class='bx bx-heart' ></i>&nbsp;<?= $likes; ?></span></button>
+              <button type="submit" name="like" class="btn btn-post-action btn-post-like"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
             </form>
             <?php endif; ?>
-            <button class="btn btn-like"><span class="jejer"><i class='bx bx-message-rounded-dots'></i>&nbsp;Comment</span></button>
+            <button class="btn btn-post-action btn-post-comment"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
             <?php else : ?>
-              <button class="btn btn-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart' ></i>&nbsp;<?= $likes; ?></span></button>
-              <button class="btn btn-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-rounded-dots'></i>&nbsp;Comment</span></button>
+              <button class="btn btn-post-action btn-post-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
+              <button class="btn btn-post-action btn-post-comment" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
             <?php endif; ?>
           </div>
         </div>
         <div class="clear"></div>
 
         <?php if($postingan["komen"] === "true") : ?>
+        <div class="box-comment-wrapper align-items-end float-end">
         <?php foreach($comments as $komen) : ?>
         <?php
         $usersKomen = $komen["username"];
         $detailUserKomen = query("SELECT nama, fp, verified, geek FROM users_tb WHERE username='$usersKomen'")[0];  
         ?>
-        <div class="box-comment-wrapper align-items-end float-end">
           <div class="box box-comment mt-4">
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
@@ -287,7 +286,7 @@
                   <img src="<?= BASEURL; ?>/img/profil/<?= $detailUserKomen["fp"]; ?>" class="pp-post" alt="<?= $detailUserKomen["nama"]; ?>" />
                 </div>
                 <div class="ms-3">
-                  <span class="namauser"><?= $detailUserKomen["nama"]; ?><?php if($detailUserKomen["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detailUserKomen["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
+                  <span class="namauser"><a href="<?= BASEURL; ?>/p/<?= $usersKomen; ?>"><?= $detailUserKomen["nama"]; ?></a><?php if($detailUserKomen["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detailUserKomen["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
                   <span class="tglpost"><?= $komen["time"]; ?><?php if($user["geek"] === "true") : ?> #<?= $komen["id"]; ?><?php endif; ?></span>
                 </div>
               </div>
@@ -316,8 +315,8 @@
               <?= $komen["komen"]; ?>
             </div>
           </div>
-        </div>
         <?php endforeach; ?>
+        </div>
         <?php endif; ?>
 
         <div class="clear"></div>
