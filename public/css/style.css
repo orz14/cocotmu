@@ -332,7 +332,7 @@ body {
   transition: all 0.5s ease !important;
 }
 .btn-post-action i {
-  transition: all 0.3s ease !important;
+  transition: all 0.2s ease !important;
 }
 .btn-post-action:hover i {
   transform: rotate(360deg) translate(0);
