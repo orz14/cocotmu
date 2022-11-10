@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link href="<?= BASEURL."/".$_GET['url']; ?>" rel="canonical" />
-    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu32.png" rel="icon" sizes="32x32" />
-    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" rel="icon" sizes="192x192" />
-    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" rel="apple-touch-icon-precomposed" />
-    <meta content="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu144.png" name="msapplication-TileImage" />
-    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" rel="icon" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu32-v2.png" rel="icon" sizes="32x32" />
+    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon-v2.png" rel="icon" sizes="192x192" />
+    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon-v2.png" rel="apple-touch-icon-precomposed" />
+    <meta content="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu144-v2.png" name="msapplication-TileImage" />
+    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon-v2.png" rel="icon" type="image/x-icon" />
     <title><?= $data['judul']; ?>cocotMU</title>
     <meta content="Tempat untuk menyampaikan bacotan, keresahan, dan keluh kesah kalian 😈" name="description" />
     <meta content="sosmed, sosial media, bacotan, keresahan, keluh kesah, karya anak bangsa" name="keywords" />
@@ -35,7 +35,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="cocotMU" />
     <meta property="og:description" content="Tempat untuk menyampaikan bacotan, keresahan, dan keluh kesah kalian 😈" />
-    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" />
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon-v2.png" />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:locale:alternate" content="en_GB" />
