@@ -80,17 +80,14 @@ function editProfil($data){
 	return mysqli_affected_rows($koneksi);
 }
 
-function posting($data){
+function posting($usernameUser, $teks, $timePosting){
     global $koneksi;
-	$username = $data["username"];
-	$teks = $data["teks"];
     $imgDefault = "";
 	if($_FILES['img']['error'] === 4){
 		$img = $imgDefault;
 	} else{
 		$img = uploadImg();
 	}
-	$time = $data["time"];
 	$suspend = "false";
 	if(strlen($teks)> 1021){
 		echo "<script>
@@ -103,7 +100,7 @@ function posting($data){
 			</script>";
 		return false;
 	}else{
-		mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$username', '$teks', '$img', '$time', '$suspend')");
+		mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$usernameUser', '$teks', '$img', '$timePosting', '$suspend')");
 	}
 	return mysqli_affected_rows($koneksi);
 }
@@ -130,26 +127,32 @@ function editPost($data){
 	return mysqli_affected_rows($koneksi);
 }
 
-function ngelike($data){
+function ngelike($id_post, $usernameUser){
     global $koneksi;
-	$id_post = $data['id_post'];
-	$username = $data['username'];
-	$dataLike = mysqli_query($koneksi, "SELECT id FROM like_tb WHERE id_post='$id_post' AND username = '$username'");
+	$dataLike = mysqli_query($koneksi, "SELECT id FROM like_tb WHERE id_post='$id_post' AND username = '$usernameUser'");
 		if(mysqli_num_rows($dataLike) === 1){
-			return true;
+			return false;
 		}else{
-            mysqli_query($koneksi, "INSERT INTO like_tb VALUES('', '$id_post', '$username')");
+            mysqli_query($koneksi, "INSERT INTO like_tb VALUES('', '$id_post', '$usernameUser')");
 		}
 	return mysqli_affected_rows($koneksi);
 }
 
-function ngomen($data){
+function ngomen($id_post, $usernameUser, $komen, $timePosting){
     global $koneksi;
-	$id_post = $data['idpost'];
-	$username = $data['username'];
-	$komen = $data['komen'];
-	$time = $data['time'];
-	mysqli_query($koneksi, "INSERT INTO komen_tb VALUES('', '$id_post', '$username', '$komen', '$time')");
+	if(strlen($komen)> 1021){
+		echo "<script>
+				alert('Komentar tidak boleh melebihi 1000 karakter.');
+			</script>";
+		return false;
+	}else if(!$komen){
+		echo "<script>
+				alert('Komentar tidak boleh kosong.');
+			</script>";
+		return false;
+	}else{
+		mysqli_query($koneksi, "INSERT INTO komen_tb VALUES('', '$id_post', '$usernameUser', '$komen', '$timePosting')");
+	}
 	return mysqli_affected_rows($koneksi);
 }
 

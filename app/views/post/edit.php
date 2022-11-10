@@ -80,11 +80,11 @@
           </div>
           <?php endif; ?>
           <div class="text-center mt-3">
-            <a class="btn btn-secondary mb-1" href="<?= BASEURL; ?>" role="button"
+            <a class="btn btn-secondary clickk mb-1" href="<?= BASEURL; ?>" role="button"
               ><span class="jejer"><i class="bx bxs-left-arrow icon-left"></i>Kembali</span></a
             >
             <?php if($post["suspend"] === "false") : ?>
-            <button type="submit" name="edit" class="btn btn-orz mb-1">
+            <button type="submit" name="edit" class="btn btn-orz clickk mb-1">
               <span class="jejer"><i class="bx bxs-save icon-left"></i>Simpan Perubahan</span>
             </button>
             <?php endif; ?>

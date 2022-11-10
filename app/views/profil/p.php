@@ -17,11 +17,12 @@
         $jumlahPost = count($post);
         // Like
         if(isset($_POST["like"])){
-          $postId = $_POST['id_post'];
-          if(ngelike($_POST) > 0){
+          $id_post = $_POST['id_post'];
+          $usernameUser = $_SESSION['cocotmuuser'];
+          if(ngelike($id_post, $usernameUser) > 0){
               echo "
                 <script>
-                  document.location.href = '".BASEURL."/p/".$username."/#".$postId."';
+                  document.location.href = '".BASEURL."/p/".$username."/#".$id_post."';
                 </script>
               ";
           }else{
@@ -30,11 +31,14 @@
         }
         // Komen
         if(isset($_POST["kirimkomen"])){
-          $postId = $_POST['idpost'];
-          if(ngomen($_POST) > 0){
+          $id_post = $_POST['idpost'];
+          $usernameUser = $_SESSION['cocotmuuser'];
+          $komen = $_POST['komen'];
+          $timePosting = $time;
+          if(ngomen($id_post, $usernameUser, $komen, $timePosting) > 0){
               echo "
                 <script>
-                  document.location.href = '".BASEURL."/p/".$username."/#".$postId."';
+                  document.location.href = '".BASEURL."/p/".$username."/#".$id_post."';
                 </script>
               ";
           }else{
@@ -83,26 +87,6 @@
                 <span class="tglpost"><?= $postingan["time"]; ?><?php if($user["geek"] === "true") : ?> #<?= $postingan["id"]; ?><?php endif; ?></span>
               </div>
             </div>
-            <?php if($postingan["username"] === $_SESSION["cocotmuuser"]) : ?>
-            <div>
-              <div class="dropdown dropdown-orz">
-                <button class="btn-option dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <?php if($postingan["suspend"] === "false") : ?>
-                  <li>
-                    <a class="dropdown-item" href="<?= BASEURL; ?>/post/edit/<?= $postingan["id"]; ?>"
-                      ><span class="jejer"><i class="bx bx-edit"></i>&nbsp;Edit Post</span></a
-                    >
-                  </li>
-                  <?php endif; ?>
-                  <li>
-                    <a class="dropdown-item" href="<?= BASEURL; ?>/post/hapus/<?= $postingan["id"]; ?>" onclick="return confirm('Yakin ingin menghapus data ?');"><span class="jejer"><i class="bx bx-trash"></i>&nbsp;Hapus Post</span></a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <?php endif; ?>
           </div>
           <?php if($postingan["teks"]) : ?>
           <div class="mt-2">
@@ -124,18 +108,17 @@
             ?>
             <?php if(isset($_SESSION['cocotmulogin'])) : ?>
             <?php if(mysqli_num_rows($dataLike) === 1) : ?>
-              <button class="btn btn-post-action btn-post-like"><span class="jejer"><i class='bx bxs-heart icon-left' ></i><?= $likes; ?></span></button>
+              <button class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bxs-heart icon-left' ></i><?= $likes; ?></span></button>
             <?php else : ?>
             <form action="" method="POST">
               <input type="hidden" name="id_post" value="<?= $postingan["id"]; ?>">
-              <input type="hidden" name="username" value="<?= $usernameVisitor; ?>">
-              <button type="submit" name="like" class="btn btn-post-action btn-post-like"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
+              <button type="submit" name="like" class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
             </form>
             <?php endif; ?>
-            <a class="btn btn-post-action btn-post-comment" onClick="komen_modal('<?= $postId; ?>');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
+            <a class="btn btn-post-action btn-post-comment clickk" onClick="komen_modal('<?= $postId; ?>');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
             <?php else : ?>
-              <button class="btn btn-post-action btn-post-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
-              <button class="btn btn-post-action btn-post-comment" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
+              <button class="btn btn-post-action btn-post-like clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
+              <button class="btn btn-post-action btn-post-comment clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
             <?php endif; ?>
           </div>
         </div>
@@ -203,14 +186,12 @@
           <div class="modal-body">
             <form action="" method="post">
               <input type="hidden" name="idpost" id="ambil_id" value="#">
-              <input type="hidden" name="username" value="<?= $usernameVisitor; ?>">
-              <input type="hidden" name="time" value="<?= $time; ?>">
               <div>
                 <input id="komen" type="hidden" name="komen">
                 <trix-editor class="trix-editpost" input="komen"></trix-editor>
               </div>
               <div class="d-grid mt-3">
-                <button class="btn btn-orz" type="submit" name="kirimkomen">
+                <button class="btn btn-orz clickk" type="submit" name="kirimkomen">
                   <span class="jejer justify-content-center">Kirim<i class="bx bx-send icon-right"></i></span>
                 </button>
               </div>

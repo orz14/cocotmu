@@ -62,10 +62,10 @@
             <label for="floatingPassword3">Konfirmasi Password Baru</label>
           </div>
           <div class="text-center">
-            <a class="btn btn-secondary mb-1" href="<?= BASEURL; ?>/profil" role="button"
+            <a class="btn btn-secondary clickk mb-1" href="<?= BASEURL; ?>/profil" role="button"
               ><span class="jejer"><i class="bx bxs-left-arrow icon-left"></i>Kembali</span></a
             >
-            <button type="submit" name="edit" class="btn btn-orz mb-1">
+            <button type="submit" name="edit" class="btn btn-orz clickk mb-1">
               <span class="jejer"><i class="bx bxs-save icon-left"></i>Simpan</span>
             </button>
           </div>

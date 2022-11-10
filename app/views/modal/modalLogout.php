@@ -9,8 +9,8 @@
           </div>
           <div class="modal-body">Yakin ingin logout ?</div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-danger" href="<?= BASEURL; ?>/logout" role="button">Logout</a>
+            <button type="button" class="btn btn-secondary clickk" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-danger clickk" href="<?= BASEURL; ?>/logout" role="button">Logout</a>
           </div>
         </div>
       </div>

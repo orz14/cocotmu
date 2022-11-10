@@ -16,10 +16,10 @@
           <?php if(!isset($_SESSION['cocotmulogin'])) : ?>
           <!-- Belum Login -->
           <div class="btn-top">
-            <button type="button" class="btn btn-orz" data-bs-toggle="modal" data-bs-target="#modalLogin">
+            <button type="button" class="btn btn-orz clickk" data-bs-toggle="modal" data-bs-target="#modalLogin">
               <span class="jejer"><i class="bx bx-log-in-circle icon-left"></i>Login</span>
             </button>
-            <button type="button" class="btn btn-orz" data-bs-toggle="modal" data-bs-target="#modalDaftar">
+            <button type="button" class="btn btn-orz clickk" data-bs-toggle="modal" data-bs-target="#modalDaftar">
               <span class="jejer"><i class="bx bx-edit-alt icon-left"></i>Daftar</span>
             </button>
           </div>
@@ -27,13 +27,13 @@
           <?php if(isset($_SESSION['cocotmulogin'])) : ?>
           <!-- Sudah Login -->
           <div class="btn-top menu-mobile">
-            <a class="btn btn-orz" href="<?= BASEURL; ?>" role="button"
+            <a class="btn btn-orz clickk" href="<?= BASEURL; ?>" role="button"
               ><span class="jejer"><i class="bx bx-home icon-left"></i>Beranda</span></a
             >
           </div>
           <div class="btn-top">
             <div class="dropdown">
-              <button class="btn-profil dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+              <button class="btn-profil dropdown-toggle clickk" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                 <img src="<?= BASEURL; ?>/img/profil/<?= $user["fp"]; ?>" class="profilku" alt="<?= $user["nama"]; ?>" />
                 <span class="namaku"><?= $user["nama"]; ?></span>
               </button>
@@ -46,9 +46,9 @@
                 </li>
                 <li class="mb-3"><span class="dropdown-username">@<?= $username; ?></span></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="<?= BASEURL; ?>/profil">Lihat Profil</a></li>
-                <li><a class="dropdown-item" href="<?= BASEURL; ?>/profil/password">Ganti Password</a></li>
-                <li><a class="dropdown-item dropdown-item-logout" data-bs-toggle="modal" data-bs-target="#modalLogout" role="button">Logout</a></li>
+                <li><a class="dropdown-item clickk" href="<?= BASEURL; ?>/profil">Lihat Profil</a></li>
+                <li><a class="dropdown-item clickk" href="<?= BASEURL; ?>/profil/password">Ganti Password</a></li>
+                <li><a class="dropdown-item dropdown-item-logout clickk" data-bs-toggle="modal" data-bs-target="#modalLogout" role="button">Logout</a></li>
               </ul>
             </div>
           </div>

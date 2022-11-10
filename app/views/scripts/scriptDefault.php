@@ -7,6 +7,22 @@
       // Preloader
       $(window).load(function(){$(".spinner").fadeOut(),$("#preloader").delay(350).fadeOut("slow"),$("body").delay(350).css({overflow:"visible"})});
 
+      // Ripple Effect Click
+      !(function (e) {
+        e(".clickk").click(function (c) {
+          let a = e(this);
+          0 === a.find(".orz-ripple-effect").length && a.append("<span class='orz-ripple-effect'></span>");
+          let b = a.find(".orz-ripple-effect");
+          if ((b.removeClass("animate"), !b.height() && !b.width())) {
+            let d = Math.max(a.outerWidth(), a.outerHeight());
+            b.css({ height: d, width: d });
+          }
+          d = c.pageX - a.offset().left - b.width() / 2;
+          c = c.pageY - a.offset().top - b.height() / 2;
+          b.css({ top: c + "px", left: d + "px" }).addClass("animate");
+        });
+      })(jQuery);
+
       document.addEventListener('trix-file-accept', function(e) {
         e.preventDefault();
       });
