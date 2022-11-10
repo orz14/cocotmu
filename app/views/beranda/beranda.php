@@ -217,11 +217,11 @@
         $likes = count(query("SELECT id FROM like_tb WHERE id_post=$postId"));
         $comments = query("SELECT id, username, komen, time FROM komen_tb WHERE id_post=$postId");
         ?>
-        <div class="box mt-4" id="<?= $postingan["id"]; ?>">
+        <div class="box module mt-4" id="<?= $postingan["id"]; ?>">
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
               <div>
-                <img src="<?= BASEURL; ?>/img/profil/<?= $detail["fp"]; ?>" class="pp-post" alt="<?= $detail["nama"]; ?>" />
+                <img data-src="<?= BASEURL; ?>/img/profil/<?= $detail["fp"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="<?= $detail["nama"]; ?>" />
               </div>
               <div class="ms-3">
                 <span class="namauser"><a href="<?= BASEURL; ?>/p/<?= $users; ?>"><?= $detail["nama"]; ?></a><?php if($detail["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detail["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
@@ -256,7 +256,7 @@
           <?php endif; ?>
           <?php if($postingan["img"]) : ?>
           <div class="mt-3 text-center">
-            <img src="<?= BASEURL; ?>/img/post/<?= $postingan["img"]; ?>" class="img-post" alt="Images" />
+            <img data-src="<?= BASEURL; ?>/img/post/<?= $postingan["img"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
           </div>
           <?php endif; ?>
           <div class="post-action d-flex mt-2 gap-2">
@@ -276,7 +276,7 @@
               <button type="submit" name="like" class="btn btn-post-action btn-post-like"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
             </form>
             <?php endif; ?>
-            <a href="#" class="btn btn-post-action btn-post-comment" onClick="komen_modal('<?= $postId; ?>');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
+            <a class="btn btn-post-action btn-post-comment" onClick="komen_modal('<?= $postId; ?>');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
             <?php else : ?>
               <button class="btn btn-post-action btn-post-like" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left' ></i><?= $likes; ?></span></button>
               <button class="btn btn-post-action btn-post-comment" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
@@ -284,18 +284,17 @@
           </div>
         </div>
         <div class="clear"></div>
-
-        <div class="box-comment-wrapper align-items-end float-end">
+        <div class="box-comment-wrapper align-items-end float-end module">
         <?php foreach($comments as $komen) : ?>
         <?php
         $usersKomen = $komen["username"];
         $detailUserKomen = query("SELECT nama, fp, verified, geek FROM users_tb WHERE username='$usersKomen'")[0];  
         ?>
-          <div class="box box-comment mt-4">
+          <div class="box box-comment module mt-4">
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
                 <div>
-                  <img src="<?= BASEURL; ?>/img/profil/<?= $detailUserKomen["fp"]; ?>" class="pp-post" alt="<?= $detailUserKomen["nama"]; ?>" />
+                  <img data-src="<?= BASEURL; ?>/img/profil/<?= $detailUserKomen["fp"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="<?= $detailUserKomen["nama"]; ?>" />
                 </div>
                 <div class="ms-3">
                   <span class="namauser"><a href="<?= BASEURL; ?>/p/<?= $usersKomen; ?>"><?= $detailUserKomen["nama"]; ?></a><?php if($detailUserKomen["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detailUserKomen["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
@@ -327,9 +326,9 @@
               <?= $komen["komen"]; ?>
             </div>
           </div>
+          <div class="clear"></div>
         <?php endforeach; ?>
         </div>
-
         <div class="clear"></div>
         <?php endforeach; ?>
         </div>
@@ -458,3 +457,4 @@
       </div>
     </div>
     <?php endif; ?>
+    

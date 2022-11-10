@@ -97,6 +97,11 @@ function posting($data){
 				alert('Postingan tidak boleh melebihi 1000 karakter.');
 			</script>";
 		return false;
+	}else if(!$teks && !$img){
+		echo "<script>
+				alert('Postingan tidak boleh kosong.');
+			</script>";
+		return false;
 	}else{
 		mysqli_query($koneksi, "INSERT INTO cocotan_tb VALUES('', '$username', '$teks', '$img', '$time', '$suspend')");
 	}
