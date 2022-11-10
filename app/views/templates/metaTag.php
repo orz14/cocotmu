@@ -8,8 +8,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link href="<?= BASEURL."/".$_GET['url']; ?>" rel="canonical" />
     <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu32.png" rel="icon" sizes="32x32" />
-    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu192.png" rel="icon" sizes="192x192" />
-    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu180.png" rel="apple-touch-icon-precomposed" />
+    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" rel="icon" sizes="192x192" />
+    <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" rel="apple-touch-icon-precomposed" />
     <meta content="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmu144.png" name="msapplication-TileImage" />
     <link href="https://cdn.jsdelivr.net/gh/orz14/cocotmu@main/public/img/logo/cocotmuicon.png" rel="icon" type="image/x-icon" />
     <title><?= $data['judul']; ?>cocotMU</title>
