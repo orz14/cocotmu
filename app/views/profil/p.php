@@ -10,6 +10,13 @@
               </script>
             ";
           exit;
+        }else if($username === 'deleted-user'){
+          echo "
+              <script>
+                document.location.href = '".BASEURL."';
+              </script>
+            ";
+          exit;
         }
         $user = query("SELECT nama, jk, fp, geek FROM users_tb WHERE username = '$username'")[0];
         // Postingan

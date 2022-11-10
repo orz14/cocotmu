@@ -385,11 +385,11 @@
           <div class="modal-body">
             <form action="" method="post" enctype="multipart/form-data">
               <div class="was-validated form-floating mb-3">
-                <input type="text" name="nama" class="form-control" id="floatingInput2" placeholder="Masukkan Nama Akun" required />
+                <input type="text" name="nama" maxlength="100" class="form-control" id="floatingInput2" placeholder="Masukkan Nama Akun" required />
                 <label for="floatingInput2">Nama Akun</label>
               </div>
               <div class="was-validated form-floating mb-3">
-                <input type="text" name="username" class="form-control" id="floatingInput3" placeholder="Masukkan Username" required />
+                <input type="text" name="username" minlength="4" maxlength="20" class="form-control" id="floatingInput3" placeholder="Masukkan Username" required />
                 <label for="floatingInput3">Username</label>
               </div>
               <div class="was-validated form-floating mb-3">
@@ -409,7 +409,7 @@
                 <label for="floatingSelect">Jenis Kelamin</label>
               </div>
               <div class="was-validated form-floating mb-2">
-                <input type="text" name="wa" class="form-control" id="floatingInput4" placeholder="Masukkan Nomor WhatsApp" required />
+                <input type="number" name="wa" minlength="10" maxlength="15" class="form-control" id="floatingInput4" placeholder="Masukkan Nomor WhatsApp" required />
                 <label for="floatingInput4">Nomor WhatsApp</label>
               </div>
               <div class="mb-3">

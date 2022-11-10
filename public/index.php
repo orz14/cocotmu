@@ -2,7 +2,7 @@
 session_start();
 
 // MENAMPILKAN PESAN ERROR | true OR false |
-$error_report = true;
+$error_report = false;
 if($error_report === true) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);

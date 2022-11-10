@@ -16,6 +16,8 @@
           // Hapus Postingan
           global $koneksi;
           mysqli_query($koneksi, "DELETE FROM cocotan_tb WHERE id = $id");
+          mysqli_query($koneksi, "DELETE FROM like_tb WHERE id_post = $id");
+          mysqli_query($koneksi, "DELETE FROM komen_tb WHERE id_post = $id");
           ?>
           <div class="text-center">
             Menghapus postingan...
