@@ -45,7 +45,7 @@
       });
 
       // Auto Reload
-      setInterval(function() { $(".postingan").load("<?= BASEURL; ?>/refresh").fadeIn("slow"); }, 10000);
+      setInterval(function() { $(".postingan").load("<?= BASEURL; ?>/refresh").fadeIn("slow"); }, 20000);
 
       // let _0xf6cf = [
       //   "\x6C\x69\x6E\x6B",

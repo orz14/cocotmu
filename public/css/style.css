@@ -671,6 +671,7 @@ trix-toolbar {
   background-repeat: no-repeat;
   cursor: pointer;
   transition: all 0.3s ease !important;
+  z-index: 3;
 }
 .top-nav:hover {
   background-position: -38px 0;
@@ -804,6 +805,13 @@ trix-toolbar {
   .menu-mobile,
   .namaku {
     display: none;
+  }
+  .box-comment-wrapper {
+    width: 94%;
+    border-left: 4px solid rgba(40, 53, 147, 0.2);
+  }
+  .box-comment {
+    width: 95%;
   }
 }
 @media (max-width: 575px) {

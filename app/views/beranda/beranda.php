@@ -226,7 +226,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
               <div>
-                <img data-src="<?= BASEURL; ?>/img/profil/<?= $detail["fp"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="<?= $detail["nama"]; ?>" />
+                <img src="<?= BASEURL; ?>/img/profil/<?= $detail["fp"]; ?>" class="pp-post" alt="<?= $detail["nama"]; ?>" />
               </div>
               <div class="ms-3">
                 <span class="namauser"><a href="<?= BASEURL; ?>/p/<?= $users; ?>"><?= $detail["nama"]; ?></a><?php if($detail["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detail["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />
@@ -298,7 +298,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
                 <div>
-                  <img data-src="<?= BASEURL; ?>/img/profil/<?= $detailUserKomen["fp"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="<?= $detailUserKomen["nama"]; ?>" />
+                  <img src="<?= BASEURL; ?>/img/profil/<?= $detailUserKomen["fp"]; ?>" class="pp-post" alt="<?= $detailUserKomen["nama"]; ?>" />
                 </div>
                 <div class="ms-3">
                   <span class="namauser"><a href="<?= BASEURL; ?>/p/<?= $usersKomen; ?>"><?= $detailUserKomen["nama"]; ?></a><?php if($detailUserKomen["verified"] === "true") : ?><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i><?php endif; ?><?php if($detailUserKomen["geek"] === "true") : ?><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545' ></i><?php endif; ?></span><br />

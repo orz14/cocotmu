@@ -3,3 +3,5 @@ app/config/cocotmu_db.sql
 app/config/note.txt
 public/img/post
 public/img/profil
+public/css/old
+public/css/style.css
